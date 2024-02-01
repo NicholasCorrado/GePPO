@@ -1,0 +1,26 @@
+# Python build file
+
+universe = vanilla
+log = $(Cluster)_$(Process).log
+
+# Choose a version of Python from the table above
+# transfer_input_files = http://proxy.chtc.wisc.edu/SQUID/chtc/python##.tar.gz
+
+executable = job.sh
+output = $(Cluster)_$(Process).out
+error = $(Cluster)_$(Process).err
+
+should_transfer_files = YES
+when_to_transfer_output = ON_EXIT
+# transfer_input_files = file1, file2, etc
+
+#mkdir results/$(Cluster)_(results_dir)
+initialdir = $(output_dir)
+arguments = $(Process) $(Step) $(params)
+
+requirements = (Target.HasCHTCStaging == true)
+request_cpus = 1
+request_memory = $(mem)GB
+request_disk = $(disk)GB
+
+queue $(num_jobs) mem, disk, params from $(args_file)

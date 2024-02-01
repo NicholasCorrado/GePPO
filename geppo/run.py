@@ -137,38 +137,38 @@ def main():
     log_names = run(inputs_dict)
 
     # Aggregate results
-    outputs = []
-    for log_name in log_names:
-        os.makedirs(args.save_path,exist_ok=True)
-        filename = os.path.join(args.save_path,log_name)
-        
-        with open(filename,'rb') as f:
-            log_data = pickle.load(f)
-        
-        outputs.append(log_data)
+    # outputs = []
+    # for log_name in log_names:
+    #     os.makedirs(args.save_path,exist_ok=True)
+    #     filename = os.path.join(args.save_path,log_name)
+    #
+    #     with open(filename,'rb') as f:
+    #         log_data = pickle.load(f)
+    #
+    #     outputs.append(log_data)
 
     # Save data
-    save_env = args.env_name.split('-')[0].lower()
-    if args.task_name is not None:
-        save_env = '%s_%s'%(save_env,args.task_name.lower())
-    save_alg = args.alg_name.lower()
-    save_date = datetime.today().strftime('%m%d%y_%H%M%S')
-    if args.save_file is None:
-        save_file = '%s_%s_%s_%s'%(
-            args.env_type,save_env,save_alg,save_date)
-    else:
-        save_file = '%s_%s_%s_%s_%s'%(
-            args.env_type,save_env,save_alg,args.save_file,save_date)
-
-    os.makedirs(args.save_path,exist_ok=True)
-    save_filefull = os.path.join(args.save_path,save_file)
-
-    with open(save_filefull,'wb') as f:
-        pickle.dump(outputs,f)
-    
-    for log_name in log_names:
-        filename = os.path.join(args.save_path,log_name)
-        os.remove(filename)
+    # save_env = args.env_name.split('-')[0].lower()
+    # if args.task_name is not None:
+    #     save_env = '%s_%s'%(save_env,args.task_name.lower())
+    # save_alg = args.alg_name.lower()
+    # save_date = datetime.today().strftime('%m%d%y_%H%M%S')
+    # if args.save_file is None:
+    #     save_file = '%s_%s_%s_%s'%(
+    #         args.env_type,save_env,save_alg,save_date)
+    # else:
+    #     save_file = '%s_%s_%s_%s_%s'%(
+    #         args.env_type,save_env,save_alg,args.save_file,save_date)
+    #
+    # os.makedirs(args.save_path,exist_ok=True)
+    # save_filefull = os.path.join(args.save_path,save_file)
+    #
+    # with open(save_filefull,'wb') as f:
+    #     pickle.dump(outputs,f)
+    #
+    # for log_name in log_names:
+    #     filename = os.path.join(args.save_path,log_name)
+    #     os.remove(filename)
 
     end_time = datetime.now()
     print('Time Elapsed: %s'%(end_time-start_time))

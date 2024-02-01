@@ -2,8 +2,6 @@ import glob
 import os
 
 import numpy as np
-import seaborn
-import seaborn as sns
 # from plotting.plot import plot
 from matplotlib import pyplot as plt
 
@@ -17,7 +15,6 @@ def get_latest_run_id(save_dir: str) -> int:
     return max_run_id
 
 def get_line_styles(name):
-    colors = sns.color_palette(n_colors=10)
 
     linewidth = 1
     linestyle = '-'

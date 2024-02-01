@@ -137,7 +137,7 @@ alg_kwargs = [
 parser.add_argument('--alg_name',help='algorithm',type=str,default='geppo')
 
 parser.add_argument('--save_freq',help='how often to store temp files',
-    type=float, default=1096)
+    type=float)
 parser.add_argument('--checkpoint_file',help='checkpoint file name',type=str,
     default='TEMPLOG')
 parser.add_argument('--keep_checkpoints',help='keep all checkpoint info',

@@ -161,6 +161,7 @@ class BaseAlg:
 
         self.eval_module = Evaluate(self.actor, n_eval_episodes=20, eval_freq=10,
                                     log_path=save_dir, runner=self.runner)
+        self.update_count = 0
 
     
     def _update(self):
@@ -200,6 +201,7 @@ class BaseAlg:
             self.runner.generate_batch(self.env,self.actor)
 
             self._update()
+            self.update_count += 1
 
             s_raw, rtg_raw = self.runner.get_env_info()
             self.env.update_rms(s_raw,rtg_raw)
@@ -214,7 +216,7 @@ class BaseAlg:
             self.runner.update()
 
             # Save training data to checkpoint file
-            if sim_total >= checkpoints[checkpt_idx]:
+            if self.update_count % self.save_freq == 0:
                 # self.dump_and_save(params,sim_total)
                 self.eval_module.evaluate(sim_total, train_env=self.env)
                 checkpt_idx += 1
